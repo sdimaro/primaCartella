@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aula Interattiva</title>
+  <style>
+    img {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <label for="righe">Righe:</label>
+  <input type="number" id="righe" value="0" min="0" />
+
+  <label for="colonne">Colonne:</label>
+  <input type="number" id="colonne" value="0" min="0" />
+
+  <button onclick="generaTabella()">Genera Tabella</button>
+
+  <div id="output"></div>
+
+  <script>
+    function accendi(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.src = "computer-on.png";
+        element.setAttribute("onclick", `spegni('${id}')`);
+      }
+    }
+
+    function spegni(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.src = "computer-off.png";
+        element.setAttribute("onclick", `accendi('${id}')`);
+      }
+    }
+
+    function generaTabella() {
+      let numRighe = document.getElementById("righe").value;
+      let numColonne = document.getElementById("colonne").value;
+
+      let table = "<table>";
+      for (let i = 0; i < numRighe; i++) {
+        table += "<tr>";
+        for (let j = 0; j < numColonne; j++) {
+          let imgId = `img_${i}_${j}`;
+          table += `<td><img id="${imgId}" src="computer-off.png" width="150" height="125.29" onclick="accendi('${imgId}')"></td>`;
+        }
+        table += "</tr>";
+      }
+      table += "</table>";
+
+      document.getElementById("output").innerHTML = table;
+    }
+  </script>
+</body>
+</html>
